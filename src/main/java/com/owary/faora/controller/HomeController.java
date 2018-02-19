@@ -37,7 +37,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public RedirectView add(@RequestParam("title") String title, @RequestParam("desc") String desc, HttpServletRequest request){
+    public RedirectView add(@RequestParam(value="title") String title, @RequestParam(value="desc") String desc, HttpServletRequest request){
         Todo todo = new Todo(title, desc);
         service.addEntry(todo);
         String path = request.getContextPath();
@@ -46,7 +46,7 @@ public class HomeController {
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public RedirectView update(@RequestParam("id") Long id, @RequestParam("title") String title, @RequestParam("desc") String desc, HttpServletRequest request){
+    public RedirectView update(@RequestParam(value="id") Long id, @RequestParam(value="title") String title, @RequestParam(value="desc") String desc, HttpServletRequest request){
         Todo todo = service.getTodoById(id);
         todo.setTitle(title);
         todo.setDescription(desc);
@@ -57,7 +57,7 @@ public class HomeController {
     }
 
     @RequestMapping(value="/delete", method = RequestMethod.POST)
-    public RedirectView delete(@RequestParam("id") Long id, HttpServletRequest request){
+    public RedirectView delete(@RequestParam(value="id") Long id, HttpServletRequest request){
         service.deleteEntryById(id);
         String path = request.getContextPath();
         RedirectView view  = new RedirectView(path);
@@ -65,7 +65,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
-    public RedirectView done(@RequestParam("id") Long id, HttpServletRequest request){
+    public RedirectView done(@RequestParam(value="id") Long id, HttpServletRequest request){
         service.markDone(id);
         String path = request.getContextPath();
         RedirectView view  = new RedirectView(path);
@@ -73,7 +73,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/undone", method = RequestMethod.POST)
-    public RedirectView undone(@RequestParam("id") Long id, HttpServletRequest request){
+    public RedirectView undone(@RequestParam(value="id") Long id, HttpServletRequest request){
         service.markUndone(id);
         String path = request.getContextPath();
         RedirectView view  = new RedirectView(path);
