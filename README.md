@@ -1,4 +1,4 @@
-# todoapp
+# Todo Spring MVC Application
 Spring MVC Application with pure Java config
 
 ## What I have done?
