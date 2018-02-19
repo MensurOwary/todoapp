@@ -48,13 +48,23 @@ public class DatabaseConfig {
         return new HibernateTransactionManager(sessionFactory());
     }
 
+//    @Bean
+//    public DataSource getDataSource() {
+//        BoneCPDataSource dataSource = new BoneCPDataSource();
+//        dataSource.setDriverClass(environment.getProperty("database.driver"));
+//        dataSource.setJdbcUrl(environment.getProperty("database.url"));
+//        dataSource.setUsername(environment.getProperty("database.root"));
+//        dataSource.setPassword(environment.getProperty("database.password"));
+//        return dataSource;
+//    }
+
     @Bean
     public DataSource getDataSource() {
         BoneCPDataSource dataSource = new BoneCPDataSource();
         dataSource.setDriverClass(environment.getProperty("database.driver"));
-        dataSource.setJdbcUrl(environment.getProperty("database.url"));
-        dataSource.setUsername(environment.getProperty("database.root"));
-        dataSource.setPassword(environment.getProperty("database.password"));
+        dataSource.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
+        dataSource.setUsername(System.getenv("JDBC_USERNAME"));
+        dataSource.setPassword(System.getenv("JDBC_PASSWORD"));
         return dataSource;
     }
 
