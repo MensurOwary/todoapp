@@ -56,12 +56,19 @@ public class HomeController {
         return view;
     }
 
+//    @RequestMapping(value="/delete", method = RequestMethod.GET)
+//    public RedirectView delete(@RequestParam(value="id") Long id, HttpServletRequest request){
+//        service.deleteEntryById(id);
+//        String path = request.getContextPath();
+//        RedirectView view  = new RedirectView(path);
+//        return view;
+//    }
+
     @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public RedirectView delete(@RequestParam(value="id") Long id, HttpServletRequest request){
+    @ResponseBody
+    public String delete(@RequestParam(value="id") Long id){
         service.deleteEntryById(id);
-        String path = request.getContextPath();
-        RedirectView view  = new RedirectView(path);
-        return view;
+        return "true";
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)

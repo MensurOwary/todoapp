@@ -56,10 +56,18 @@ $('body').on('click', '.delete', function(e){
     e.preventDefault();
     var id = $(".id",$(this).parent().parent()).text();
     $.get("delete",{id: id},function (data) {
-            var value = $(data).find("#box-body").html();
-            $("#box-body").html(value);
+            console.log(data);
+            pageRefresh();
     },'html');
 });
+
+function pageRefresh(){
+    // var baseURL = $('head base').attr('href');
+    $.get(baseURL,function (data) {
+        var value = $(data).find("#box-body").html();
+        $("#box-body").html(value);
+    },'html');
+}
 
 function postRequester(id, done) {
     if (done){
@@ -73,7 +81,6 @@ function postRequester(id, done) {
             $("#box-body").html(value);
         },'html');
     }
-
 }
 
 // When the user clicks the button, open the modal
