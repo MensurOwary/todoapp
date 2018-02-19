@@ -37,54 +37,37 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public RedirectView add(@RequestParam(value="title") String title, @RequestParam(value="desc") String desc, HttpServletRequest request){
+    @ResponseBody
+    public String add(@RequestParam(value="title") String title, @RequestParam(value="desc") String desc){
         Todo todo = new Todo(title, desc);
-        service.addEntry(todo);
-        String path = request.getContextPath();
-        RedirectView view = new RedirectView(path);
-        return view;
+        return Boolean.toString(service.addEntry(todo));
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public RedirectView update(@RequestParam(value="id") Long id, @RequestParam(value="title") String title, @RequestParam(value="desc") String desc, HttpServletRequest request){
+    @ResponseBody
+    public String update(@RequestParam(value="id") Long id, @RequestParam(value="title") String title, @RequestParam(value="desc") String desc){
         Todo todo = service.getTodoById(id);
         todo.setTitle(title);
         todo.setDescription(desc);
-        service.updateEntry(todo);
-        String path = request.getContextPath();
-        RedirectView view  = new RedirectView(path);
-        return view;
+        return Boolean.toString(service.updateEntry(todo));
     }
 
-//    @RequestMapping(value="/delete", method = RequestMethod.GET)
-//    public RedirectView delete(@RequestParam(value="id") Long id, HttpServletRequest request){
-//        service.deleteEntryById(id);
-//        String path = request.getContextPath();
-//        RedirectView view  = new RedirectView(path);
-//        return view;
-//    }
-
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
     @ResponseBody
     public String delete(@RequestParam(value="id") Long id){
-        service.deleteEntryById(id);
-        return "true";
+        return Boolean.toString(service.deleteEntryById(id));
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
-    public RedirectView done(@RequestParam(value="id") Long id, HttpServletRequest request){
-        service.markDone(id);
-        String path = request.getContextPath();
-        RedirectView view  = new RedirectView(path);
-        return view;
+    @ResponseBody
+    public String done(@RequestParam(value="id") Long id){
+        return Boolean.toString(service.markDone(id));
     }
 
     @RequestMapping(value = "/undone", method = RequestMethod.POST)
-    public RedirectView undone(@RequestParam(value="id") Long id, HttpServletRequest request){
-        service.markUndone(id);
-        String path = request.getContextPath();
-        RedirectView view  = new RedirectView(path);
-        return view;
+    @ResponseBody
+    public String undone(@RequestParam(value="id") Long id){
+        return Boolean.toString(service.markUndone(id));
     }
 
     @RequestMapping("/test")

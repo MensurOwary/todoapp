@@ -83,7 +83,7 @@
                                 <textarea class="form-control" rows="3" name="desc" id="desc" placeholder="Little bit of info here..."></textarea>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <button type="submit" class="btn btn-default submitbtn" id="">Submit</button>
                             </div>
                         </form>
 

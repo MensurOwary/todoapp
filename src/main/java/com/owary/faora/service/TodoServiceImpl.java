@@ -37,47 +37,57 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void addEntry(Todo todo) {
+    public boolean addEntry(Todo todo) {
         try {
             dao.addEntry(todo);
+            return true;
         }catch (DataAccessException e){
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void updateEntry(Todo todo) {
+    public boolean updateEntry(Todo todo) {
         try {
             dao.updateEntry(todo);
+            return true;
         }catch (DataAccessException e){
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void deleteEntryById(long id) {
+    public boolean deleteEntryById(long id) {
         try {
             dao.deleteEntryById(id);
+            return true;
         }catch (DataAccessException e){
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void markDone(long id) {
+    public boolean markDone(long id) {
         try {
             dao.markDone(id);
+            return true;
         }catch (DataAccessException e){
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void markUndone(long id) {
+    public boolean markUndone(long id) {
         try {
             dao.markUndone(id);
+            return true;
         }catch (DataAccessException e){
             e.printStackTrace();
+            return false;
         }
     }
 

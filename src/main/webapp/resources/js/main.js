@@ -11,11 +11,14 @@ function closer(){
   modal.style.display = "block";
 }
 
+function closeModal(){
+    modal.style.display = "none";
+}
+
 $('body').on('click', '.title', function(e){
     e.preventDefault();
     var value = $(this).css("text-decoration");
     var id = $(".id",$(this).parent()).text();
-    console.log(id);
     if (value=="line-through"){
         var changes = {
             textDecoration: "none"
@@ -29,7 +32,6 @@ $('body').on('click', '.title', function(e){
         $(this).css(changes);
         postRequester(id, true);
     }
-
 });
 
 $('body').on('click', '.update', function(e){
@@ -55,14 +57,55 @@ $('#addBtn').click(function () {
 $('body').on('click', '.delete', function(e){
     e.preventDefault();
     var id = $(".id",$(this).parent().parent()).text();
-    $.get("delete",{id: id},function (data) {
-            console.log(data);
-            pageRefresh();
+    $.post("delete",{id: id},function (data) {
+        if(data=="true"){
+            pageRefresh()
+        }else{
+            alert("Error Occured While Deleting");
+        }
     },'html');
 });
 
+$("#form").submit(function (e) {
+    e.preventDefault();
+    var value = $("#form").attr('action');
+    if(value=="add"){
+        addSubmission();
+    }else if(value="update"){
+        updateSubmission();
+    }
+});
+
+function addSubmission(){
+    var title = $("#title").val();
+    var desc = $("#desc").val();
+    $.post("add", {title:title, desc:desc}, function (data) {
+        if (data=="true"){
+            closeModal();
+            pageRefresh();
+        }else{
+            closeModal();
+            alert("Error Occured");
+        }
+    })
+}
+
+function updateSubmission(){
+    var id = $("#id").val();
+    var title = $("#title").val();
+    var desc = $("#desc").val();
+    $.post("update", {id:id, title:title, desc:desc}, function (data) {
+        if (data=="true"){
+            closeModal();
+            pageRefresh();
+        }else{
+            closeModal();
+            alert("Error Occured");
+        }
+    })
+}
+
 function pageRefresh(){
-    // var baseURL = $('head base').attr('href');
     $.get(baseURL,function (data) {
         var value = $(data).find("#box-body").html();
         $("#box-body").html(value);
@@ -72,13 +115,15 @@ function pageRefresh(){
 function postRequester(id, done) {
     if (done){
         $.post("done",{id: id},function (data) {
-            var value = $(data).find("#box-body").html();
-            $("#box-body").html(value);
+                if(data=="true"){
+                    pageRefresh();
+                }
         },'html');
     }else {
         $.post("undone",{id: id},function (data) {
-            var value = $(data).find("#box-body").html();
-            $("#box-body").html(value);
+            if(data=="true"){
+                pageRefresh();
+            }
         },'html');
     }
 }

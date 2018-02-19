@@ -8,11 +8,11 @@ public interface TodoService {
 
     List<Todo> getAllTodos();
     Todo getTodoById(long id);
-    void addEntry(Todo todo);
-    void updateEntry(Todo todo);
-    void deleteEntryById(long id);
-    void markDone(long id);
-    void markUndone(long id);
+    boolean addEntry(Todo todo);
+    boolean updateEntry(Todo todo);
+    boolean deleteEntryById(long id);
+    boolean markDone(long id);
+    boolean markUndone(long id);
     List<Todo> sort();
 
 }
