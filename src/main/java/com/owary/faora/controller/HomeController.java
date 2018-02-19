@@ -24,7 +24,7 @@ public class HomeController {
     @Autowired
     private TodoService service;
 
-    @RequestMapping("/")
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView index(){
         ModelAndView model = new ModelAndView("main");
         List<Todo> list = service.sort();
