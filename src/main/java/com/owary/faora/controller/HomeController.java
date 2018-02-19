@@ -56,7 +56,7 @@ public class HomeController {
         return view;
     }
 
-    @RequestMapping(value="/delete", method = RequestMethod.POST)
+    @RequestMapping(value="/delete", method = RequestMethod.GET)
     public RedirectView delete(@RequestParam(value="id") Long id, HttpServletRequest request){
         service.deleteEntryById(id);
         String path = request.getContextPath();

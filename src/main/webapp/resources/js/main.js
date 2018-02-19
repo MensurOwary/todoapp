@@ -55,7 +55,7 @@ $('#addBtn').click(function () {
 $('body').on('click', '.delete', function(e){
     e.preventDefault();
     var id = $(".id",$(this).parent().parent()).text();
-    $.post("delete",{id: id},function (data) {
+    $.get("delete",{id: id},function (data) {
             var value = $(data).find("#box-body").html();
             $("#box-body").html(value);
     },'html');
