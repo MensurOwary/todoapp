@@ -1,7 +1,7 @@
 # Todo Spring MVC Application
 Spring MVC Application with pure Java config
 
-## What I have done?
+## What I have done
 
 - Pure Java Configuration (Not any Spring related XML)
 - Hibernate ORM using HibernateTemplate
